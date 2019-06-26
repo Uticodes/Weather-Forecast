@@ -14,7 +14,7 @@
         android:minHeight="?listPreferredItemHeightLarge">
 
         <TextView
-            android:id="@+id/textView_date"
+            android:id="@+id/textView_date_if"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -31,7 +31,7 @@
             tools:text="1.1.2000" />
 
         <TextView
-            android:id="@+id/textView_temperature"
+            android:id="@+id/textView_temperature_if"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -47,7 +47,7 @@
             tools:text="25.0°C" />
 
         <TextView
-            android:id="@+id/textView_condition"
+            android:id="@+id/textView_condition_if"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
@@ -65,7 +65,7 @@
             tools:text="Clear" />
 
         <ImageView
-            android:id="@+id/imageView_condition_icon"
+            android:id="@+id/imageView_condition_icon_if"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
@@ -75,7 +75,7 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textView_temperature"
+            app:layout_constraintStart_toEndOf="@+id/textView_temperature_if"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintWidth_percent="0.15"

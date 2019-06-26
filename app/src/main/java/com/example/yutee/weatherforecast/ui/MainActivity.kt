@@ -1,7 +1,12 @@
 package com.example.yutee.weatherforecast.ui
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -36,11 +41,50 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
-        //bottom_nav.setupWithNavController(navController)
+        bottom_nav.setupWithNavController(navController)
 
         NavigationUI.setupActionBarWithNavController(this, navController)
 
-        //requestLocationPermission()
+        requestLocationPermission()
+
+        if (hasLocationPermission()) {
+            bindLocationManager()
+        }
+        else
+            requestLocationPermission()
+    }
+    private fun bindLocationManager() {
+        LifecycleBoundLocationManager(
+                this,
+                fusedLocationProviderClient, locationCallback
+        )
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(null, navController)
+    }
+    private fun requestLocationPermission() {
+        ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
+                MY_PERMISSION_ACCESS_COARSE_LOCATION
+        )
+    }
+    private fun hasLocationPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
+
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
+    ) {
+        if (requestCode == MY_PERMISSION_ACCESS_COARSE_LOCATION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                bindLocationManager()
+            else
+                Toast.makeText(this, "Please, set location manually in settings", Toast.LENGTH_LONG).show()
+        }
     }
 
 }
